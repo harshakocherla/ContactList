@@ -1,0 +1,115 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<a class="navbar-brand" href="#">Call Log</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarColor01">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="modal" data-target = "#addContact" href="#">Add Contact</a>
+			</li>
+			
+		</ul>
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+		</form>
+	</div>
+	<div id="addContact" class="modal">
+		<form (submit) = "addContact()">
+			<div class="modal-dialog" role="dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Add Contact</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						
+						<div class="form-group">
+							<label for= "first_name">First Name: </label>
+							<input type="text" [(ngModel)]="first_name" name="first_name" placeholder="Enter First Name" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for= "last_name">Last Name: </label>
+							<input type="text" [(ngModel)] = "last_name" name="last_name" placeholder="Enter last Name" class="form-control">
+						</div>
+						<div class="form-group">
+							<label for= "phone">Phone Number: </label>
+							<input type="text" [(ngModel)] = "phone" name="phone" placeholder="Enter Phone Number" class="form-control">
+						</div>
+						
+						
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" >Add Contacts</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</nav>
+<div class="container">
+	<table class="table table-striped table-hover table-bordered">
+		<thead class="thead-dark">
+			<tr>
+				<th>#</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Contact</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody *ngFor = "let contact of contacts; let i = index">
+			<tr class="table-info">
+				<td>{{i+1}}</td>
+				<td>{{contact.first_name}}</td>
+				<td>{{contact.last_name}}</td>
+				<td>{{contact.phone}}</td>
+				<td><input type="button" name="delete" (click)="deleteContact(contact._id)" value="Delete" class="btn btn-danger">
+				<span> | </span><input type="button" name="edit" data-toggle = "modal" data-target = "#editContact" value="Edit" class="btn btn-secondary"><span>{{contact._id}}</span>
+				<div id="editContact" class="modal">
+					<form (submit) = "editContact(contact._id)">
+						<div class="modal-dialog" role="dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Edit Contact</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									
+									<div class="form-group">
+										<label for= "first_name">First Name: </label>
+										<input type="text" [(ngModel)]="first_name" name="first_name" value="{{contact._id}}" placeholder="{{contact._id}}" class="form-control">
+									</div>
+									<div class="form-group">
+										<label for= "last_name">Last Name: </label>
+										<input type="text" [(ngModel)] = "last_name" name="last_name" value="{{contact.last_name}}"  placeholder="{{contact.last_name}}" class="form-control">
+									</div>
+									<div class="form-group">
+										<label for= "phone">Phone Number: </label>
+										<input type="text" [(ngModel)] = "phone" name="phone" value="{{contact.phone}}" placeholder="{{contact.phone}}" class="form-control">
+									</div>
+									
+									
+								</div>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-primary" >Save Changes</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</div>
