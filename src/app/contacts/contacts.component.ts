@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { Contact } from '../contact';
 
+import { clone } from 'lodash';
+
 @Component({
 	selector: 'app-contacts',
 	templateUrl: './contacts.component.html',
@@ -18,6 +20,7 @@ export class ContactsComponent implements OnInit {
 	first_name: string;
 	last_name: string;
 	phone: string;
+	edit_contact: any = {};
 
 
 	addContact() {
@@ -33,7 +36,8 @@ export class ContactsComponent implements OnInit {
 
 				this.contactService.getContacts()
 					.subscribe(contacts => this.contacts = contacts);
-			})
+			});
+
 
 
 	}
@@ -51,14 +55,30 @@ export class ContactsComponent implements OnInit {
 						}
 					}
 				}
-			})
+			});
+	}
+
+
+	showEditContact(contact: Contact) {
+
+		this.edit_contact = clone(contact);
+	}
+
+	updateContact() {
+		this.contactService.updateContact(this.edit_contact)
+			.subscribe(contact => this.edit_contact = contact);
+		this.edit_contact = {};
 	}
 
 
 	ngOnInit() {
 
-		this.contactService.getContacts()
+		var data = this.contactService.getContacts()
 			.subscribe(contacts => this.contacts = contacts);
+
+		console.log(data);
 	}
+
+
 
 }

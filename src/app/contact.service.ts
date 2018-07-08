@@ -6,6 +6,8 @@ import { Contact } from './contact';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+import { findIndex } from 'lodash';
+
 
 @Injectable()
 export class ContactService {
@@ -39,6 +41,22 @@ export class ContactService {
 
 		return this.http.delete('http://localhost:3000/api/contact/' + id)
 			.map(res => res.json());
+	}
+
+
+
+	updateContact(contact: Contact) {
+
+		console.log(contact._id);
+
+		return this.http.put('http://localhost:3000/api/edit_contact/' + contact._id, contact)
+			.map(res => res.json());
+
+		/*	let index = findIndex(this.pItems, (p: Product) => {
+				return p.id === product.id;
+			})
+	
+			this.pItems[index] = product;*/
 	}
 
 	/*updateProduct(contact: Contact) {

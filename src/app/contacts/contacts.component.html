@@ -72,9 +72,14 @@
 				<td>{{contact.last_name}}</td>
 				<td>{{contact.phone}}</td>
 				<td><input type="button" name="delete" (click)="deleteContact(contact._id)" value="Delete" class="btn btn-danger">
-				<span> | </span><input type="button" name="edit" data-toggle = "modal" data-target = "#editContact" value="Edit" class="btn btn-secondary"><span>{{contact._id}}</span>
-				<div id="editContact" class="modal">
-					<form (submit) = "editContact(contact._id)">
+				<span> | </span><input type="button" name="edit" data-toggle = "modal" data-target = "#editContact" value="Edit" class="btn btn-secondary" (click) = "showEditContact(contact)">
+				
+			</td>
+		</tr>
+	</tbody>
+</table>
+<div id="editContact" class="modal">
+					<form>
 						<div class="modal-dialog" role="dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -87,29 +92,25 @@
 									
 									<div class="form-group">
 										<label for= "first_name">First Name: </label>
-										<input type="text" [(ngModel)]="first_name" name="first_name" value="{{contact._id}}" placeholder="{{contact._id}}" class="form-control">
+										<input type="text" [(ngModel)]="edit_contact.first_name" name="first_name"  class="form-control">
 									</div>
 									<div class="form-group">
 										<label for= "last_name">Last Name: </label>
-										<input type="text" [(ngModel)] = "last_name" name="last_name" value="{{contact.last_name}}"  placeholder="{{contact.last_name}}" class="form-control">
+										<input type="text" [(ngModel)] = "edit_contact.last_name" name="last_name" class="form-control">
 									</div>
 									<div class="form-group">
 										<label for= "phone">Phone Number: </label>
-										<input type="text" [(ngModel)] = "phone" name="phone" value="{{contact.phone}}" placeholder="{{contact.phone}}" class="form-control">
+										<input type="text" [(ngModel)] = "edit_contact.phone" name="phone"  class="form-control">
 									</div>
 									
 									
 								</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary" >Save Changes</button>
+									<button type="submit" class="btn btn-primary" (click)= "updateContact(edit_contact)" >Save Changes</button>
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 								</div>
 							</div>
 						</div>
 					</form>
 				</div>
-			</td>
-		</tr>
-	</tbody>
-</table>
 </div>
