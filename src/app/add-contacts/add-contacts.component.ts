@@ -10,11 +10,11 @@ import { Contact } from '../contact';
 })
 export class AddContactsComponent implements OnInit {
 
-  private first_name: string;
-  private last_name: string;
-  private phone: string;
+  public first_name: string;
+  public last_name: string;
+  public phone: string;
   
-    constructor(private contactService: ContactService) {
+    constructor(public contactService: ContactService) {
       this.first_name = '';
       this.last_name = '';
       this.phone = '';
