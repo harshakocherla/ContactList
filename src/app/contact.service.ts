@@ -1,70 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-
 import { Contact } from './contact';
-
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
-import { findIndex } from 'lodash';
-
 
 @Injectable()
 export class ContactService {
 
-	constructor(private http: Http) { }
+	private contacts: Contact[];
+	private nextId: number;
+  
+	constructor() {
+	  this.contacts = [
+		new Contact("Harsha", "Kocherla", "(612) 405-0553", 0),
+	  ];
+  
+	  this.nextId = 3;
+	}
 
 	//retrieving contact details
 
-	getContacts() {
-
-		return this.http.get('http://localhost:3000/api/contacts')
-			.map(res => res.json());
+	public getContacts(): Contact[]{
+		return this.contacts;
 	}
-
 
 	//add contact
 
-	addContact(newContact) {
-
-		var headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-
-		return this.http.post('http://localhost:3000/api/contact', newContact, { headers: headers })
-			.map(res => res.json());
-
+	public addContact(first_name: string, last_name: string, phone: string) {
+		const contact = new Contact(first_name, last_name, phone, this.nextId);
+		this.contacts.push(contact);
+		this.nextId++;
 	}
 
 	//delete contact
 
-	deleteContact(id) {
-
-		return this.http.delete('http://localhost:3000/api/contact/' + id)
-			.map(res => res.json());
+	public deleteContact(id: number): void {
+		console.log(this.contacts);
+		
+		this.contacts = this.contacts.filter((contact) => contact._id != id);
 	}
 
-
-
-	updateContact(contact: Contact) {
-
-		console.log(contact._id);
-
-		return this.http.put('http://localhost:3000/api/edit_contact/' + contact._id, contact)
-			.map(res => res.json());
-
-		/*	let index = findIndex(this.pItems, (p: Product) => {
-				return p.id === product.id;
-			})
-	
-			this.pItems[index] = product;*/
-	}
-
-	/*updateProduct(contact: Contact) {
-
-	let index = findIndex(this.pItems, (p: Product) => {
-		return p.id === product.id;
-	})
-
-	this.pItems[index] = product;
-}*/
 }
