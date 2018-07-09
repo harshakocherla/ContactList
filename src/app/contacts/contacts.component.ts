@@ -19,12 +19,12 @@ export class ContactsComponent implements OnInit {
 	constructor(private contactService: ContactService) { }
 
 
-	private deleteContact(): void {
+	public deleteContact(): void {
 		this.contactService.deleteContact(this.contact._id);
 	}
 
 
-	private showEditContact(contact: Contact): void {
+	public showEditContact(contact: Contact): void {
 		this.edit_contact = clone(contact);
 	}
 

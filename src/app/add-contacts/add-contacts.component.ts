@@ -10,9 +10,9 @@ import { Contact } from '../contact';
 })
 export class AddContactsComponent implements OnInit {
 
-  public first_name: string;
-  public last_name: string;
-  public phone: string;
+  private first_name: string;
+  private last_name: string;
+  private phone: string;
   
     constructor(private contactService: ContactService) {
       this.first_name = '';
@@ -23,7 +23,7 @@ export class AddContactsComponent implements OnInit {
     ngOnInit() {
     }
   
-    private addContact(): void {
+    public addContact(): void {
       this.contactService.addContact(this.first_name, this.last_name, this.phone);
       this.first_name = '';
       this.last_name = '';

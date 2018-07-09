@@ -10,5 +10,5 @@ import {Contact} from './contact';
 })
 export class AppComponent {
 	title = 'Contact List';
-	constructor(private contactService: ContactService){}
+	constructor(public contactService: ContactService){}
 }
