@@ -8,18 +8,20 @@ import { clone } from 'lodash';
 @Component({
 	selector: 'app-contacts',
 	templateUrl: './contacts.component.html',
-	styleUrls: ['./contacts.component.css'],
+	styleUrls: ['./contacts.component.css']
 })
 export class ContactsComponent implements OnInit {
 
 	@Input()
-	public contact: Contact;
+	private contact: Contact;
 	public edit_contact: any = {};
   
 	constructor(private contactService: ContactService) { }
 
 
 	public deleteContact(): void {
+		console.log(this.contact);
+		
 		this.contactService.deleteContact(this.contact._id);
 	}
 

@@ -12,12 +12,14 @@ export class ContactService {
 		new Contact("Harsha", "Kocherla", "(612) 405-0553", 0),
 	  ];
   
-	  this.nextId = 3;
+	  this.nextId = 1;
 	}
 
 	//retrieving contact details
 
 	public getContacts(): Contact[]{
+		console.log(this.contacts);
+		
 		return this.contacts;
 	}
 
@@ -32,9 +34,8 @@ export class ContactService {
 	//delete contact
 
 	public deleteContact(id: number): void {
-		console.log(this.contacts);
-		
 		this.contacts = this.contacts.filter((contact) => contact._id != id);
+		this.nextId--;
 	}
 
 }
